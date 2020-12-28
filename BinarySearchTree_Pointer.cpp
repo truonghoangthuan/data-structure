@@ -43,6 +43,35 @@ Tree Search_Tree(Tree& t, int x) {
 	}
 }
 
+/*===========TreeHeight=========*/
+int treeHeight(Tree T){
+    if(T == NULL){
+        return -1;
+    }
+    else{
+        int heightLeft = treeHeight(T->pLeft);
+        int heightRight = treeHeight(T->pRight);
+        if(heightLeft > heightRight)
+            return heightLeft+1;
+        return heightRight+1;
+    }
+}
+
+int hNode(Tree t, int x){
+    if(t == NULL){
+        return -1;
+    }
+    else{
+		Tree newTree = Search_Tree(t, x);
+        if (newTree == 0) {
+			return -1;
+		} 
+		else {
+			return treeHeight(newTree);	
+		}
+    }
+}
+
 /*===========NLR===========*/
 void PreOrder(Tree& t) {
 	if (t != NULL) {
@@ -174,9 +203,10 @@ void MOTHERBASE(Tree& t) {
 		cout << "Press 6 = Search tree\n";
 		cout << "Press 7 = Is sibling or not\n";
 		cout << "Press 8 = Is ancestor or not\n";
+		cout << "Press 9 = Height of tree X\n";
 		cout << "Press 0 = Exit\n";
 		int choice; cin >> choice;
-		if (choice < 0 || choice > 8) {
+		if (choice < 0 || choice > 9) {
 			cout << "Wrong choice\n";
 			system("pause");
 		}
@@ -251,6 +281,13 @@ void MOTHERBASE(Tree& t) {
 				cout << "True" << endl;
 			else
 				cout << "False" << endl;
+			system("pause");
+		}
+		else if (choice == 9) {
+			int x;
+			cout << "Choose a number: ";
+			cin >> x;
+			cout << hNode(t, x) << endl;
 			system("pause");
 		}
 		else
